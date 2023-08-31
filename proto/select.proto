@@ -16,6 +16,11 @@ option (gogoproto.unmarshaler_all) = true;
 message Row {
 	optional bytes handle = 1;
 	optional bytes data = 2;
+	// start_ts and commit_ts is version of the row itself. If the row is not
+	// from TiKV storage directly, e.g. it's a aggregated value, start_ts and
+	// commit_ts won't be filled.
+	optional uint64 start_ts = 3;
+	optional uint64 commit_ts = 4;
 }
 
 message Error {
